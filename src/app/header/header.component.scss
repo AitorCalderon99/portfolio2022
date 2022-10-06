@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 15px;
+
+  #bigAletter {
+    user-select: none;
+    font-size: xxx-large;
+
+  }
+
+  .fontOldenburg {
+    font-family: Oldenburg, serif;
+
+  }
+}
+
