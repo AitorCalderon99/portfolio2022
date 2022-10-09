@@ -3,13 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { BackgroundRainDirective } from './shared/background-rain.directive';
+import { BackgroundRainDirective } from './shared/bacground-rain/background-rain.directive';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    BackgroundRainDirective
+    BackgroundRainDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule

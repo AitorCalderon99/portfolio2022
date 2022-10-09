@@ -1,0 +1,30 @@
+.animated-text {
+  font-family: "VT323", monospace, sans-serif;
+  text-shadow: 0 0 5px #ffffff;
+  position: fixed;
+  bottom: -100vh;
+  user-select: none;
+  animation-name: float-animation;
+  animation-timing-function: ease-in-out;
+  z-index: -1;
+}
+
+@keyframes float-animation {
+  0% {
+    bottom: 100vh;
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    bottom: 0;
+    opacity: 0;
+  }
+}
