@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  nameText = 'A';
 
-  constructor() { }
+
+  active = false;
+
+  toggleNav() {
+    this.active = !this.active;
+    this.active ? this.nameText = 'Aitor Calderon' : this.nameText = 'A';
+
+  }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

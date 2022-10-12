@@ -1,3 +1,6 @@
+$hamburger-layer-color: white;
+@import 'node_modules/hamburgers/_sass/hamburgers/hamburgers';
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -5,13 +8,15 @@
 
   #bigAletter {
     user-select: none;
-    font-size: xxx-large;
-
-  }
-
-  .fontOldenburg {
-    font-family: Oldenburg, serif;
-
+    font-size: xx-large;
+    &::first-letter{
+      font-size: xxx-large;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+      font-family: Oldenburg, serif;
+    }
   }
 }
 

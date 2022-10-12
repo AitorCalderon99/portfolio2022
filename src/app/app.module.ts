@@ -9,6 +9,7 @@ import { WorkComponent } from './work/work.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { AppRoutingModule } from './app-routing.module';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -20,10 +21,11 @@ import { AppRoutingModule } from './app-routing.module';
     AboutComponent,
     ContactComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        CommonModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
