@@ -5,12 +5,35 @@
   align-items: center;
   height: 80vh;
 
-
   .main-text {
-    font-size: 5.5vw;
+    font-size: 6vw;
     font-weight: bold;
+    color: #fff;
   }
-  .category-text{
-    font-size: 3vw;
+
+  .category-text {
+    font-size: 4vw;
+  }
+
+  .row-about {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.3vw;
+
+    a {
+      text-decoration: none;
+      color: white;
+
+      &:hover{
+        border-bottom: 1px solid white;
+      }
+
+    }
+
+    :first-child {
+      margin-right: 4vw;
+    }
   }
 }
+
