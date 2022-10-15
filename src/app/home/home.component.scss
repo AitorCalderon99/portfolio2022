@@ -9,6 +9,19 @@
     font-size: 6vw;
     font-weight: bold;
     color: #fff;
+
+    span {
+      box-shadow: inset 0 0 0 0 white;
+      color: whitesmoke;
+      margin: 0 -.25rem;
+      padding: 0 .25rem;
+      transition: color .8s ease-in-out, box-shadow .8s ease-in-out;
+
+      &:hover {
+        box-shadow: inset 1500px 0 0 0 ghostwhite;
+        color: black;
+      }
+    }
   }
 
 
@@ -26,11 +39,29 @@
     a {
       text-decoration: none;
       color: white;
+    }
 
-      &:hover{
-        border-bottom: 1px solid white;
+    .hover-underline-animation {
+      display: inline-block;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 1.7px;
+        bottom: 0;
+        left: 0;
+        background-color: white;
+        transform-origin: bottom right;
+        transition: transform 0.35s ease-out;
       }
 
+      &:hover:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
     }
 
     :first-child {

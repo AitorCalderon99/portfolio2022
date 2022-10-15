@@ -8,7 +8,7 @@ $hamburger-layer-color: white;
 
   #bigAletter {
     user-select: none;
-    font-size: xx-large;
+    font-size: x-large;
     &::first-letter{
       font-size: xxx-large;
     }
@@ -19,4 +19,3 @@ $hamburger-layer-color: white;
     }
   }
 }
-
