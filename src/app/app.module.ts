@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { AppRoutingModule } from './app-routing.module';
 import {CommonModule} from "@angular/common";
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {CommonModule} from "@angular/common";
     HomeComponent,
     WorkComponent,
     AboutComponent,
-    ContactComponent],
+    ContactComponent,
+    NavigationComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

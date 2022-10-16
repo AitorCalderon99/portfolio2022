@@ -1,15 +1,10 @@
 <div class="header">
-  <span id="bigAletter" class="fontOldenburg" ><a [routerLink]="['']">{{nameText}}</a></span>
-  <button [ngClass]="active ? 'is-active' : ''" class="hamburger hamburger--collapse" type="button" (click)="toggleNav()" >
+  <span id="bigAletter" class="fontOldenburg"><a [routerLink]="['']">{{menuService.active ? 'Aitor Calderon' : 'A'}}</a></span>
+  <button [ngClass]="menuService.active ? 'is-active' : ''" class="hamburger hamburger--collapse" type="button"
+          (click)="toggleNav()">
   <span class="hamburger-box">
     <span class="hamburger-inner"></span>
   </span>
   </button>
 </div>
-<div class="overlay-content">
-  <a [routerLink]="['']">Home</a>
-  <a [routerLink]="['work']">Work</a>
-  <a [routerLink]="['about']">About</a>
-  <a [routerLink]="['contact']">Contact</a>
-  <a href="#">Linkedin</a>
-</div>
+

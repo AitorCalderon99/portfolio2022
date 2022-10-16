@@ -6,23 +6,16 @@ import {MenuService} from "../shared/menu.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  nameText = 'A';
-  active = false;
+export class HeaderComponent {
 
 
   toggleNav() {
     this.menuService.toggleNav();
-    this.active = this.menuService.active;
-    this.active ? this.nameText = 'Aitor Calderon' : this.nameText = 'A';
 
   }
 
-  constructor(private menuService: MenuService) {
+  constructor(public menuService: MenuService) {
   }
 
-  ngOnInit(): void {
-   this.active = this.menuService.active;
-  }
 
 }
