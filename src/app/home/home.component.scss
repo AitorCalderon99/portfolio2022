@@ -1,3 +1,4 @@
+@import "../app.component";
 .container {
   display: flex;
   justify-content: center;
@@ -39,29 +40,6 @@
     a {
       text-decoration: none;
       color: white;
-    }
-
-    .hover-underline-animation {
-      display: inline-block;
-      position: relative;
-
-      &:after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        transform: scaleX(0);
-        height: 1.7px;
-        bottom: 0;
-        left: 0;
-        background-color: white;
-        transform-origin: bottom right;
-        transition: transform 0.35s ease-out;
-      }
-
-      &:hover:after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
-      }
     }
 
     :first-child {

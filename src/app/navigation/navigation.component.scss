@@ -1,0 +1,43 @@
+@import "../app.component";
+$visible: none;
+
+.homeSvg{
+  display: $visible;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+.overlay-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  .home:hover{
+    $visible: block;
+  }
+
+  a{
+    color: lightgrey;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 5em;
+    -webkit-transition: font-size .5s ease;
+    -moz-transition: font-size .5s ease;
+    -o-transition: font-size .5s ease;
+    transition: font-size .5s ease;
+
+    &:hover{
+      filter: brightness(300%);
+      font-size: 6em;
+    }
+
+    &:last-child{
+      font-size: large;
+      padding-top: 6px;
+    }
+
+  }
+}
