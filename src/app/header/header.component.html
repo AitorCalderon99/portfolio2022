@@ -1,10 +1,7 @@
 <div class="header">
-  <span id="bigAletter" class="fontOldenburg"><a [routerLink]="['']">{{menuService.active ? 'Aitor Calderon' : 'A'}}</a></span>
-  <button [ngClass]="menuService.active ? 'is-active' : ''" class="hamburger hamburger--collapse" type="button"
-          (click)="toggleNav()">
-  <span class="hamburger-box">
-    <span class="hamburger-inner"></span>
-  </span>
-  </button>
+  <span id="bigAletter" class="fontOldenburg"><a
+    [routerLink]=" menuService.active ? null:['']">{{menuService.active ? 'Aitor Calderon' : 'A'}}</a></span>
+  <input type="checkbox" role="button" aria-label="Display the menu" [checked]="menuService.active ? 'active' : ''"
+         (click)="toggleNav()"/>
 </div>
 
