@@ -4,7 +4,7 @@ import {AfterViewInit, Directive, ElementRef, Input, Renderer2} from '@angular/c
   selector: '[appBackgroundRain]'
 })
 export class BackgroundRainDirective implements AfterViewInit {
-  @Input() maxFontSize = 17;
+  @Input() maxFontSize = 25;
   colorSchemeArray = [
     '#63b598', '#ce7d78', '#ea9e70', '#a48a9e', '#c6e1e8', '#648177', '#0d5ac1',
     '#f205e6', '#1c0365', '#14a9ad', '#4ca2f9', '#a4e43f', '#d298e2', '#6119d0',
@@ -85,6 +85,6 @@ export class BackgroundRainDirective implements AfterViewInit {
       setTimeout(() => {
         renderer.removeChild(elementRef.nativeElement, elementRef.nativeElement.firstChild);
       }, duration * 2300);
-    }, 35);
+    }, 34);
   }
 }

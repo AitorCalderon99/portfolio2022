@@ -27,11 +27,29 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 80vh;
+  height: 65vh;
 
+  p{
+    width: 75%;
+    margin-bottom: 0;
+    text-align: justify;
+
+  }
+  .middle-text{
+    font-size: 0.5em;
+    @media (min-width: $small) {
+      font-size: 0.8em;
+    }
+    @media (min-width: $medium) {
+      font-size: 1.2em;
+    }
+    @media (min-width: $big) {
+      font-size: 1.5em;
+    }
+  }
 
   .contact-text {
-    width: 75%;
+
     font-size: 2em;
     @media (min-width: $small) {
       font-size: 2.2em;
