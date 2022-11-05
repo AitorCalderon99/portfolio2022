@@ -1,0 +1,55 @@
+@import "../app.component";
+.contact-text{
+  display: flex;
+  justify-content: center;
+}
+.contact-medias {
+
+  @media (min-width: $medium) {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+
+  }
+
+  a {
+    font-size: 0.6em;
+
+  }
+
+  .contact-medias-left, .contact-medias-right {
+    p {
+      font-weight: bold;
+
+      @media (min-width: $small) {
+        font-size: 1.4em;
+      }
+      @media (min-width: $medium) {
+        font-size: 1.5em;
+      }
+      @media (min-width: $big) {
+        font-size: 1.9em;
+      }
+
+    }
+
+    a {
+      text-decoration: none;
+      margin-left: 10px;
+      @media (min-width: $small) {
+        font-size: 0.9em;
+      }
+      @media (min-width: $medium) {
+        margin-left: 15px;
+        font-size: 1.1em;
+      }
+      @media (min-width: $big) {
+        font-size: 1.5em;
+      }
+    }
+  }
+}
+
+
