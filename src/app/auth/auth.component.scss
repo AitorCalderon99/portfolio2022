@@ -1,0 +1,112 @@
+@import "../app.component";
+
+$brand-color-1: #f1f1f1;
+$bgcolor: transparent;
+$brand-color-3: #7e7e7e;
+
+.wrapper {
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  .main-content {
+    padding: 50px;
+    width: 100%;
+    max-width: 600px;
+    min-width: 100px;
+    background-color: $bgcolor;
+    border-radius: 10px;
+    h3 {
+      text-align: center;
+      margin-top: 0;
+      font-size: 1.8em;
+      @media (min-width: $medium) {
+        font-size: 2.3em;
+      }
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px;
+        label {
+          margin-left: 8px;
+          margin-bottom: 8px;
+          font-size: 0.99em;
+          font-weight: bold;
+        }
+        input {
+          padding: 13px;
+          font-size: 1.1em;
+          border-radius: 20px;
+          border: unset;
+          background-color: $brand-color-1;
+          color: #000000;
+          transition: background .7s;
+          &:focus {
+            outline: none;
+            background-color: $brand-color-3;
+          }
+        }
+        button {
+          width: 150px;
+          align-self: center;
+          padding: 13px;
+          border-radius: 50px;
+          border: unset;
+          background-color: $brand-color-3;
+          color: #fff;
+          font-size: 1.15em;
+          margin-top: 20px;
+          cursor: pointer;
+          &:hover {
+            transition: 1s;
+            background-color: #bbbbbb;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+    p {
+      color: #fff;
+      text-align: center;
+      margintop: 30px;
+    }
+    .social {
+      ul {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        list-style: none;
+        a {
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #777;
+          background-color: $brand-color-1;
+          padding: 15px;
+          border-radius: 50px;
+          width: 150px;
+          text-align: center;
+          margin-left: 15px;
+          transition: background .5s;
+          &:hover {
+            background-color: #ddd;
+          }
+          span {
+            margin-left: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

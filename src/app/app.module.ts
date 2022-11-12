@@ -11,6 +11,12 @@ import { ContactComponent } from './contact/contact.component';
 import { AppRoutingModule } from './app-routing.module';
 import {CommonModule} from "@angular/common";
 import { NavigationComponent } from './navigation/navigation.component';
+import { AuthComponent } from './auth/auth.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import {ReactiveFormsModule} from "@angular/forms";
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +27,19 @@ import { NavigationComponent } from './navigation/navigation.component';
     WorkComponent,
     AboutComponent,
     ContactComponent,
-    NavigationComponent],
+    NavigationComponent,
+    AuthComponent,
+    AdminComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        CommonModule
+        CommonModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        ReactiveFormsModule,
+        ReactiveFormsModule,
+        ReactiveFormsModule,
+        ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
