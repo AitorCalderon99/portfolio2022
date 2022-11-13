@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import {ReactiveFormsModule} from "@angular/forms";
 import { AdminComponent } from './admin/admin.component';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -30,17 +31,19 @@ import { AdminComponent } from './admin/admin.component';
     NavigationComponent,
     AuthComponent,
     AdminComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        CommonModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        ReactiveFormsModule,
-        ReactiveFormsModule,
-        ReactiveFormsModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    CommonModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+    provideStorage(() => getStorage()),
+    CommonModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

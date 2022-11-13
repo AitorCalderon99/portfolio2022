@@ -1,1 +1,21 @@
 <button (click)="onLogout()">Logout</button>
+<div class="container">
+  <div class="container-resumes">
+    <h2>Resumes</h2>
+    <button (click)="addResume.click()">Add resume</button>
+    <input type="file" (change)="uploadCv($event)" placeholder="Add resume" #addResume class="hidden">
+
+    <ul *ngFor="let resume of resumes">
+      <li>
+        <a [href]="resume.url">{{resume.name}}</a>
+        <button (click)="deleteResume(resume.name)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  <div class="container-images">
+    <h2>About me images</h2>
+  </div>
+  <div class="container-work">
+    <h2>Work</h2>
+  </div>
+</div>
