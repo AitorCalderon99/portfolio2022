@@ -3,7 +3,6 @@ import {UserService} from "../shared/user.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {deleteObject, getDownloadURL, listAll, ref, Storage, uploadBytes} from "@angular/fire/storage";
-import {doc, updateDoc} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-admin',
@@ -17,9 +16,12 @@ export class AdminComponent implements OnInit {
   }
 
   resumes = new Array<{ name: string, url: string }>();
+  aboutImgs = new Array<{ name: string, url: string }>();
+
 
   ngOnInit(): void {
     this.getResumes();
+    this.getAboutimgs();
   }
 
   onLogout() {
@@ -40,23 +42,23 @@ export class AdminComponent implements OnInit {
       .catch(error => console.log(error));
   }
 
-  uploadCv($event: any) {
+  upload($event: any, folder: string) {
     const file = $event.target.files[0];
-    console.log(file);
-    const resumeRef = ref(this.storage, `resume/${file.name}`)
+    const resumeRef = ref(this.storage, folder + `/${file.name}`)
     uploadBytes(resumeRef, file)
-      .then(r => {
-        console.log(r);
-        Swal.fire({
+      .then(async r => {
+        folder == 'resume' ? this.getResumes() : this.getAboutimgs();
+
+        await Swal.fire({
           icon: "success",
-          text: "Resume uploaded",
+          text: "Uploaded",
           showConfirmButton: false,
           timer: 1800
         })
-        this.getResumes();
+
       })
-      .catch(error => {
-        Swal.fire({
+      .catch(async error => {
+        await Swal.fire({
           icon: "error",
           text: error,
           showConfirmButton: true,
@@ -77,17 +79,31 @@ export class AdminComponent implements OnInit {
       .catch(error => console.log(error));
   }
 
-  deleteResume(fileName: string) {
-    const fileToDelete = ref(this.storage, 'resume/' + fileName);
+  getAboutimgs() {
+    this.aboutImgs = new Array<{ name: string, url: string }>();
+    const aboutRef = ref(this.storage, `aboutimgs`);
+    listAll(aboutRef)
+      .then(async res => {
+        for (let img of res.items) {
+          const url = await getDownloadURL(img);
+          this.aboutImgs.push({name: img.name, url: url});
+        }
+      })
+      .catch(error => console.log(error));
+  }
+
+  delete(fileName: string, folder: string) {
+    const fileToDelete = ref(this.storage, folder + '/' + fileName);
 
     deleteObject(fileToDelete).then(async () => {
+      folder == 'resume' ? this.getResumes() : this.getAboutimgs();
+
       await Swal.fire({
         icon: "success",
-        text: "Resume deleted",
+        text: "Deleted",
         showConfirmButton: false,
         timer: 1800
       })
-      this.getResumes();
     }).catch(async (error) => {
       await Swal.fire({
         icon: "error",

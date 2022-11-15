@@ -31,19 +31,20 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     NavigationComponent,
     AuthComponent,
     AdminComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    CommonModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    ReactiveFormsModule,
-    ReactiveFormsModule,
-    ReactiveFormsModule,
-    ReactiveFormsModule,
-    provideStorage(() => getStorage()),
-    CommonModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        CommonModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        ReactiveFormsModule,
+        ReactiveFormsModule,
+        ReactiveFormsModule,
+        ReactiveFormsModule,
+        provideStorage(() => getStorage()),
+        CommonModule,
+        CommonModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

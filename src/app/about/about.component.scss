@@ -1,6 +1,7 @@
 @import "../app.component";
 
 .resume {
+  cursor: pointer;
     text-decoration: none;
 
   .arrow-down {
@@ -34,7 +35,6 @@
   right: 0;
   height: 100vh;
   width: 100vw;
-  background-image: url('../shared/images/aboutbackgr.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right;
