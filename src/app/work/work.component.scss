@@ -1,0 +1,44 @@
+@import "../app.component";
+.workTextCont{
+  display: flex;
+  justify-content: center;
+  p{
+    margin-top: 0;
+    margin-bottom: 30px;
+
+  }
+}
+
+.container-work {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  column-gap: 1%;
+  row-gap: 1%;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .blue {
+    background-color: blue;
+  }
+
+  .red {
+    background-color: red;
+  }
+
+  .green {
+    background-color: green;
+  }
+  div {
+    margin-bottom: 15px;
+    width: 100%;
+
+    @media (min-width: $medium) {
+      width: 49%;
+    }
+    @media (min-width: $big) {
+      width: 32%;
+    }
+    height: 300px;
+  }
+}
