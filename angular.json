@@ -37,7 +37,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "2mb",
                   "maximumError": "1mb"
                 },
                 {
@@ -99,6 +99,19 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "sweetalert2"
+            ],
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "portfolio2022:build:production",
+            "firebaseProject": "portfolioaitorcalderon",
+            "firebaseHostingSite": "portfolioaitorcalderon"
           }
         }
       }
