@@ -12,6 +12,8 @@
     color: #fff;
 
     span {
+      display: inline-block;
+      white-space:nowrap;
       box-shadow: inset 0 0 0 0 white;
       color: whitesmoke;
       margin: 0 -.25rem;
