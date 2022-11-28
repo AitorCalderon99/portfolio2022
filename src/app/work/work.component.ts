@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-work',
@@ -12,4 +13,12 @@ export class WorkComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  async seeMore() {
+    await Swal.fire({
+      title: 'Title',
+      text: 'Description',
+      showCloseButton: true,
+      confirmButtonText: 'Demo',
+    })
+  }
 }

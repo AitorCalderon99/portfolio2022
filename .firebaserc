@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "portfolioaitorcalderon": {
+      "hosting": {
+        "portfolio2022": [
+          "portfolioaitorcalderon"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "portfolioaitorcalderon"
+  }
+}
