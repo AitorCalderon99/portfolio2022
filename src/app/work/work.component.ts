@@ -17,8 +17,9 @@ export class WorkComponent implements OnInit {
     await Swal.fire({
       title: 'Title',
       text: 'Description',
-      showCloseButton: true,
-      confirmButtonText: 'Demo',
+      showConfirmButton: true,
+      confirmButtonColor: 'black',
+      confirmButtonText: 'View Site',
     })
   }
 }

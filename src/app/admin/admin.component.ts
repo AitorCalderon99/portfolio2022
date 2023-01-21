@@ -3,6 +3,8 @@ import {UserService} from "../shared/user.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {deleteObject, getDownloadURL, listAll, ref, Storage, uploadBytes} from "@angular/fire/storage";
+import {FormControl, FormGroup} from "@angular/forms";
+import {WorkService} from "../services/work.service";
 
 @Component({
   selector: 'app-admin',
@@ -10,13 +12,19 @@ import {deleteObject, getDownloadURL, listAll, ref, Storage, uploadBytes} from "
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
-  constructor(private userService: UserService, private router: Router, private storage: Storage) {
-
-  }
-
   resumes = new Array<{ name: string, url: string }>();
   aboutImgs = new Array<{ name: string, url: string }>();
+  workForm: FormGroup;
+
+  constructor(private userService: UserService, private router: Router, private storage: Storage, private workService: WorkService) {
+    this.workForm = new FormGroup({
+      title: new FormControl(),
+      description: new FormControl(),
+      codedwith: new FormControl(),
+      link: new FormControl(),
+      images: new FormControl()
+    })
+  }
 
 
   ngOnInit(): void {
@@ -113,4 +121,13 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  async onSubmitWork() {
+    console.log(this.workForm.value)
+    const response = await this.workService.addWork(this.workForm.value);
+    console.log(response);
+  }
+
+  addNewProject() {
+
+  }
 }

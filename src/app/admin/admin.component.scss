@@ -1,4 +1,22 @@
 @import "../app.component";
+*{
+  color: black;
+    .accordion-header{
+      button{
+        font-weight: bolder;
+        font-size: 0.7em;
+      }
+    }
+    .btn-primary{
+      color: white;
+    }
+
+}
+
+
+
+/*
+
 
 * {
   .container-resumes, .container-images {
@@ -51,7 +69,7 @@
       border: none;
       padding: 20px;
       width: 120px;
-      -webkit-transition-duration: 0.4s; /* Safari */
+      -webkit-transition-duration: 0.4s; !* Safari *!
       transition-duration: 0.4s;
       text-decoration: none;
       overflow: hidden;
@@ -86,3 +104,4 @@
 
 
 }
+*/
