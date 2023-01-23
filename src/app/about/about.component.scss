@@ -2,7 +2,8 @@
 
 .resume {
   cursor: pointer;
-    text-decoration: none;
+  text-decoration: none;
+  color: white;
 
   .arrow-down {
     fill: white;
@@ -29,8 +30,12 @@
   }
 }
 
+.hidefirst {
+  visibility: hidden;
+}
+
 .backgroundimg {
-  position: absolute;
+  position: absolute !important;
   top: 0;
   right: 0;
   height: 100vh;
@@ -41,7 +46,7 @@
   z-index: -10;
   opacity: 0;
   @media (min-width: $small) {
-    opacity: 0.5;
+    opacity: 0.5 !important;
   }
 
   @media (min-width: $medium) {
@@ -61,3 +66,5 @@
     font-size: 1.5em;
   }
 }
+
+

@@ -30,6 +30,7 @@ $visible: none;
     -moz-transition: font-size .5s ease;
     -o-transition: font-size .5s ease;
     transition: font-size .5s ease;
+
     @media (min-width: $small) {
       &:hover {
         filter: brightness(300%);

@@ -1,6 +1,5 @@
-import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {getDownloadURL, list, listAll, ref, Storage} from "@angular/fire/storage";
-import {limitToLast, listVal} from "@angular/fire/database";
 import Swal from "sweetalert2";
 
 @Component({
@@ -10,14 +9,20 @@ import Swal from "sweetalert2";
 })
 export class AboutComponent implements OnInit {
   backgroundImg: string = '';
+  @ViewChild('backgroundImage') backgroundImage: any;
 
-  constructor(private storage: Storage) {
+
+  constructor(private storage: Storage, private renderer: Renderer2, private elementRef: ElementRef) {
 
   }
 
 
   ngOnInit(): void {
    this.setBackgroundImg();
+    setTimeout(() => {
+      //remove the aaa class after 5 seconds
+      this.renderer.removeClass(this.backgroundImage.nativeElement, 'hidefirst');
+    }, 2000);
   }
 
   setBackgroundImg() {
