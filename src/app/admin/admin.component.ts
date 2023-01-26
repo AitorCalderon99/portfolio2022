@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../shared/user.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
-import {deleteObject, getDownloadURL, listAll, ref, Storage, uploadBytes} from "@angular/fire/storage";
+import {deleteObject, getDownloadURL, getMetadata, listAll, ref, Storage, uploadBytes} from "@angular/fire/storage";
 import {FormControl, FormGroup} from "@angular/forms";
 import {WorkService} from "../services/work.service";
 
@@ -12,9 +12,11 @@ import {WorkService} from "../services/work.service";
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  resumes = new Array<{ name: string, url: string }>();
-  aboutImgs = new Array<{ name: string, url: string }>();
+  resumes = new Array<{ name: string, url: string, date: string, size: string }>();
+  aboutImgs = new Array<{ name: string, url: string, date: string, size: string }>();
   workForm: FormGroup;
+  isChecked = false;
+
 
   constructor(private userService: UserService, private router: Router, private storage: Storage, private workService: WorkService) {
     this.workForm = new FormGroup({
@@ -31,6 +33,7 @@ export class AdminComponent implements OnInit {
     this.getResumes();
     this.getAboutimgs();
   }
+  checkAll(){this.isChecked = !this.isChecked};
 
   onLogout() {
     this.userService.logout()
@@ -75,26 +78,33 @@ export class AdminComponent implements OnInit {
   }
 
   getResumes() {
-    this.resumes = new Array<{ name: string, url: string }>();
+    this.resumes = new Array<{ name: string, url: string, date: string, size: string }>();
     const resumeRef = ref(this.storage, `resume`);
     listAll(resumeRef)
       .then(async res => {
         for (let resume of res.items) {
+          let size: number;
+          const metadata = await getMetadata(resume);
+
           const url = await getDownloadURL(resume);
-          this.resumes.push({name: resume.name, url: url});
+
+          this.resumes.push({date: new Date(metadata.updated).toLocaleDateString(), size: this.formatBytes( metadata.size), name: resume.name, url: url});
         }
       })
       .catch(error => console.log(error));
   }
 
   getAboutimgs() {
-    this.aboutImgs = new Array<{ name: string, url: string }>();
+    this.aboutImgs = new Array<{name: string, url: string, date: string, size: string  }>();
     const aboutRef = ref(this.storage, `aboutimgs`);
     listAll(aboutRef)
       .then(async res => {
         for (let img of res.items) {
+          let size: number;
+          const metadata = await getMetadata(img);
+
           const url = await getDownloadURL(img);
-          this.aboutImgs.push({name: img.name, url: url});
+          this.aboutImgs.push({date: new Date(metadata.updated).toLocaleDateString(), size: this.formatBytes( metadata.size), name: img.name, url: url});
         }
       })
       .catch(error => console.log(error));
@@ -130,4 +140,6 @@ export class AdminComponent implements OnInit {
   addNewProject() {
 
   }
+  formatBytes(a: number,b=2){if(!+a)return"0 Bytes";const c=0>b?0:b,d=Math.floor(Math.log(a)/Math.log(1024));return`${parseFloat((a/Math.pow(1024,d)).toFixed(c))} ${["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"][d]}`}
+
 }

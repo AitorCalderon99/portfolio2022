@@ -1,18 +1,31 @@
 @import "../app.component";
-*{
+
+* {
   color: black;
-    .accordion-header{
-      button{
-        font-weight: bolder;
-        font-size: 0.7em;
+
+  .accordion-header {
+    button {
+      font-weight: bolder;
+      font-size: 0.7em;
+    }
+  }
+
+  .btn-primary, .btn-danger {
+    color: white;
+  }
+
+  .table{
+    tr{
+      td{
+        vertical-align: middle;
       }
     }
-    .btn-primary{
-      color: white;
-    }
+  }
 
+  .hidden{
+    display: none;
+  }
 }
-
 
 
 /*
