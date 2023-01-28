@@ -11,31 +11,52 @@
       <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
            data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
-          <button class="btn btn-primary" (click)="addNewProject()">Add new project</button>
-          <div class="container-work">
-            <form [formGroup]="workForm" (ngSubmit)="onSubmitWork()">
-              <div class="mb-3">
-                <label class="form-label">Title</label>
-                <input type="text" class="form-control" formControlName="title">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add new project
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+               aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form [formGroup]="workForm" (ngSubmit)="onSubmitWork()">
+                  <div class="modal-body">
+                    <div class="container-work">
+                      <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" formControlName="title">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" cols="30" rows="10" formControlName="description"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Coded with</label>
+                        <input type="text" class="form-control" formControlName="codedwith">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Link</label>
+                        <input type="text" class="form-control" formControlName="link">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Images</label>
+                        <input type="file" class="form-control" formControlName="images">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
               </div>
-              <div class="mb-3">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" cols="30" rows="10" formControlName="description"></textarea>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Coded with</label>
-                <input type="text" class="form-control" formControlName="codedwith">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Link</label>
-                <input type="text" class="form-control" formControlName="link">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Images</label>
-                <input type="file" class="form-control" formControlName="images">
-              </div>
-              <input type="submit" value="Enviar" class="btn btn-info">
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -124,9 +145,5 @@
         </div>
       </div>
     </div>
-
-
   </div>
-
 </div>
-
