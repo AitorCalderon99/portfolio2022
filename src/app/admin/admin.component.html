@@ -34,7 +34,8 @@
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Description</label>
-                        <textarea class="form-control" cols="30" rows="10" formControlName="description"></textarea>
+                        <textarea class="form-control" cols="30" rows="10" formControlName="description"
+                        ></textarea>
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Coded with</label>
@@ -46,7 +47,7 @@
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Images</label>
-                        <input type="file" class="form-control" formControlName="images">
+                        <input type="file" (change)="workImages($event)" multiple="multiple" class="form-control" formControlName="images">
                       </div>
                     </div>
                   </div>
@@ -97,7 +98,7 @@
               </tr>
               </tbody>
             </table>
-            <input type="file" (change)="upload($event, 'resume')" placeholder="Add resume" #addResume class="hidden">
+            <input type="file" (change)="prepareUpload($event, 'resume')" placeholder="Add resume" #addResume class="hidden">
           </div>
         </div>
       </div>
@@ -140,7 +141,7 @@
               </tr>
               </tbody>
             </table>
-            <input type="file" (change)="upload($event, 'aboutimgs')" #addAboutimg class="hidden">
+            <input type="file" (change)="prepareUpload($event, 'aboutimgs')" #addAboutimg class="hidden">
           </div>
         </div>
       </div>

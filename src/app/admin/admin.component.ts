@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import {deleteObject, getDownloadURL, getMetadata, listAll, ref, Storage, uploadBytes} from "@angular/fire/storage";
 import {FormControl, FormGroup} from "@angular/forms";
 import {WorkService} from "../services/work.service";
+import {AngularFireStorageReference} from "@angular/fire/compat/storage";
+import {Reference} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'app-admin',
@@ -16,6 +18,7 @@ export class AdminComponent implements OnInit {
   aboutImgs = new Array<{ name: string, url: string, date: string, size: string }>();
   workForm: FormGroup;
   isChecked = false;
+  files: FileList;
 
 
   constructor(private userService: UserService, private router: Router, private storage: Storage, private workService: WorkService) {
@@ -33,7 +36,10 @@ export class AdminComponent implements OnInit {
     this.getResumes();
     this.getAboutimgs();
   }
-  checkAll(){this.isChecked = !this.isChecked};
+
+  checkAll() {
+    this.isChecked = !this.isChecked
+  };
 
   onLogout() {
     this.userService.logout()
@@ -53,9 +59,13 @@ export class AdminComponent implements OnInit {
       .catch(error => console.log(error));
   }
 
-  upload($event: any, folder: string) {
+  prepareUpload($event: any, folder: string) {
     const file = $event.target.files[0];
-    const resumeRef = ref(this.storage, folder + `/${file.name}`)
+    this.upload(file, folder)
+  }
+
+  upload(file: File, folder: string) {
+    const resumeRef = ref(this.storage, folder + `/${file.name}`);
     uploadBytes(resumeRef, file)
       .then(async r => {
         folder == 'resume' ? this.getResumes() : this.getAboutimgs();
@@ -80,31 +90,28 @@ export class AdminComponent implements OnInit {
   getResumes() {
     this.resumes = new Array<{ name: string, url: string, date: string, size: string }>();
     const resumeRef = ref(this.storage, `resume`);
-    listAll(resumeRef)
-      .then(async res => {
-        for (let resume of res.items) {
-          let size: number;
-          const metadata = await getMetadata(resume);
-
-          const url = await getDownloadURL(resume);
-
-          this.resumes.push({date: new Date(metadata.updated).toLocaleDateString(), size: this.formatBytes( metadata.size), name: resume.name, url: url});
-        }
-      })
-      .catch(error => console.log(error));
+    this.listItems(resumeRef, this.resumes);
   }
 
   getAboutimgs() {
-    this.aboutImgs = new Array<{name: string, url: string, date: string, size: string  }>();
+    this.aboutImgs = new Array<{ name: string, url: string, date: string, size: string }>();
     const aboutRef = ref(this.storage, `aboutimgs`);
-    listAll(aboutRef)
-      .then(async res => {
-        for (let img of res.items) {
-          let size: number;
-          const metadata = await getMetadata(img);
+    this.listItems(aboutRef, this.aboutImgs);
+  }
 
-          const url = await getDownloadURL(img);
-          this.aboutImgs.push({date: new Date(metadata.updated).toLocaleDateString(), size: this.formatBytes( metadata.size), name: img.name, url: url});
+  listItems(ref: any, items: any) {
+    listAll(ref)
+      .then(async res => {
+        for (let item of res.items) {
+          const metadata = await getMetadata(item);
+
+          const url = await getDownloadURL(item);
+          items.push({
+            date: new Date(metadata.updated).toLocaleDateString(),
+            size: this.formatBytes(metadata.size),
+            name: item.name,
+            url: url
+          });
         }
       })
       .catch(error => console.log(error));
@@ -132,14 +139,27 @@ export class AdminComponent implements OnInit {
   }
 
   async onSubmitWork() {
-    console.log(this.workForm.value)
-    const response = await this.workService.addWork(this.workForm.value);
-    console.log(response);
+
+    let form = this.workForm.value;
+    if (form.title && form.description && form.codedwith && form.link && form.images) {
+      for (let i = 0; i < this.files.length; i++) {
+        let item = this.files.item(i);
+        if (item) {
+          this.upload(<File>this.files.item(i), 'work/' + form.title);
+        }
+      }
+     await this.workService.addWork(this.workForm.value);
+    }
   }
 
-  addNewProject() {
-
+  formatBytes(a: number, b = 2) {
+    if (!+a) return "0 Bytes";
+    const c = 0 > b ? 0 : b, d = Math.floor(Math.log(a) / Math.log(1024));
+    return `${parseFloat((a / Math.pow(1024, d)).toFixed(c))} ${["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]}`
   }
-  formatBytes(a: number,b=2){if(!+a)return"0 Bytes";const c=0>b?0:b,d=Math.floor(Math.log(a)/Math.log(1024));return`${parseFloat((a/Math.pow(1024,d)).toFixed(c))} ${["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"][d]}`}
+
+  workImages($event: any) {
+    this.files = $event.target.files;
+  }
 
 }
