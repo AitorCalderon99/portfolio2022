@@ -7,6 +7,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {WorkService} from "../services/work.service";
 import {AngularFireStorageReference} from "@angular/fire/compat/storage";
 import {Reference} from "@angular/fire/compat/firestore";
+import WorkInterface from "../interfaces/work.interface";
 
 @Component({
   selector: 'app-admin',
@@ -16,6 +17,7 @@ import {Reference} from "@angular/fire/compat/firestore";
 export class AdminComponent implements OnInit {
   resumes = new Array<{ name: string, url: string, date: string, size: string }>();
   aboutImgs = new Array<{ name: string, url: string, date: string, size: string }>();
+  works = new Array<WorkInterface>();
   workForm: FormGroup;
   isChecked = false;
   files: FileList;
@@ -35,6 +37,9 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.getResumes();
     this.getAboutimgs();
+    this.workService.getWorks().subscribe(works => {
+      this.works = works;
+    });
   }
 
   checkAll() {
@@ -138,6 +143,23 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  async deleteWork(work: WorkInterface) {
+    this.workService.deleteWork(work).then(async () => {
+      await Swal.fire({
+        icon: "success",
+        text: "Deleted",
+        showConfirmButton: false,
+        timer: 1800
+      })
+    }).catch(async (error) => {
+      await Swal.fire({
+        icon: "error",
+        title: "Something went wrong",
+        text: error,
+      })
+    });
+  }
+
   async onSubmitWork() {
 
     let form = this.workForm.value;
@@ -148,7 +170,7 @@ export class AdminComponent implements OnInit {
           this.upload(<File>this.files.item(i), 'work/' + form.title);
         }
       }
-     await this.workService.addWork(this.workForm.value);
+      await this.workService.addWork(this.workForm.value);
     }
   }
 

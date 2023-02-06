@@ -59,6 +59,31 @@
               </div>
             </div>
           </div>
+
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">ID</th>
+              <th scope="col">Coded with</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let project of works; let i = index">
+              <td class="first-td">
+                <a [href]="project.link">{{project.title}}</a></td>
+              <td>{{project.id}}</td>
+              <td>{{project.codedwith }}</td>
+              <td>
+
+                <button class="btn btn-danger" (click)="deleteWork(project)">Delete</button>
+
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
         </div>
       </div>
     </div>

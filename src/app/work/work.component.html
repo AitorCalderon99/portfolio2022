@@ -3,11 +3,11 @@
 
 </div>
 <div class="main-container">
-  <div class="container-work">
+  <div class="container-work" *ngFor="let project of works">
     <div class="card">
       <div class="content">
-        <div class="content-header"><h1>Team Poket</h1>
-          <p>Angular </p></div>
+        <div class="content-header"><h1>{{project.title}}</h1>
+          <p>{{project.codedwith}} </p></div>
 
         <a class="read-more-link" (click)="seeMore()"
         >See more
