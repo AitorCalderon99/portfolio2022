@@ -12,9 +12,10 @@ export const environment = {
     apiKey: 'AIzaSyCalXQCD5DaGFR6W9rZQ_JmEE6-ndIuZfk',
     authDomain: 'portfolioaitorcalderon.firebaseapp.com',
     messagingSenderId: '603738432995',
-    measurementId: 'G-RCW9FXY6DH',
+    measurementId: 'G-RCW9FXY6DH'
   },
-  production: false
+  production: false,
+  firebaseAPIKey: 'AIzaSyCalXQCD5DaGFR6W9rZQ_JmEE6-ndIuZfk'
 };
 
 /*
