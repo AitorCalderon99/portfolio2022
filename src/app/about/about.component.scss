@@ -1,70 +1,71 @@
 @import "../app.component";
 
-.resume {
-  cursor: pointer;
-  text-decoration: none;
-  color: white;
+.container-text {
 
-  .arrow-down {
-    fill: white;
-    width: 5px;
-    @media (min-width: $small) {
-      width: 7px;
+  .resume {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+
+    .arrow-down {
+      fill: white;
+      width: 5px;
+      @media (min-width: $small) {
+        width: 7px;
+      }
+      @media (min-width: $medium) {
+        width: 9px;
+      }
+
+      @media (min-width: $big) {
+        width: 12px;
+      }
     }
+
+    margin-top: 4%;
     @media (min-width: $medium) {
-      width: 9px;
+      margin-top: 3%;
     }
 
     @media (min-width: $big) {
-      width: 12px;
+      margin-top: 2%;
     }
   }
 
-  margin-top: 4%;
-  @media (min-width: $medium) {
-    margin-top: 3%;
+  .hidefirst {
+    visibility: hidden;
   }
 
-  @media (min-width: $big) {
-    margin-top: 2%;
-  }
-}
+  .backgroundimg {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    z-index: -10;
+    opacity: 0;
+    @media (min-width: $small) {
+      opacity: 0.5 !important;
+    }
 
-.hidefirst {
-  visibility: hidden;
-}
-
-.backgroundimg {
-  position: absolute !important;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 100vw;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right;
-  z-index: -10;
-  opacity: 0;
-  @media (min-width: $small) {
-    opacity: 0.5 !important;
+    @media (min-width: $medium) {
+      background-size: contain;
+    }
   }
 
-  @media (min-width: $medium) {
-    background-size: contain;
-  }
-}
-
-.middle-text {
-  font-size: 0.5em;
-  @media (min-width: $small) {
-    font-size: 0.8em;
-  }
-  @media (min-width: $medium) {
-    font-size: 1.2em;
-  }
-  @media (min-width: $big) {
-    font-size: 1.5em;
+  .middle-text {
+    font-size: 0.5em;
+    @media (min-width: $small) {
+      font-size: 0.8em;
+    }
+    @media (min-width: $medium) {
+      font-size: 1.2em;
+    }
+    @media (min-width: $big) {
+      font-size: 1.5em;
+    }
   }
 }
-
-

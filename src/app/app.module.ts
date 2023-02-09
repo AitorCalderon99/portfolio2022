@@ -18,6 +18,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AdminComponent} from './admin/admin.component';
 import {provideStorage, getStorage} from '@angular/fire/storage';
 import {provideFirestore, getFirestore} from '@angular/fire/firestore';
+import {StoreModule} from "@ngrx/store";
+import * as fromApp from './store/app.reducer';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import {provideFirestore, getFirestore} from '@angular/fire/firestore';
     ReactiveFormsModule,
     provideStorage(() => getStorage()),
     CommonModule,
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    StoreModule.forRoot(fromApp.appReducer)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from "@angular/forms";
+import {FormGroup, FormControl, NgForm} from "@angular/forms";
 import {UserService} from "../shared/user.service";
 import {Router} from "@angular/router";
 import Swal from 'sweetalert2';
+import * as AuthActions from "../../../../AngularRecipes/src/app/auth/store/auth.actions";
+import * as fromApp from "../../../../AngularRecipes/src/app/store/app.reducer";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-auth',
@@ -11,20 +14,26 @@ import Swal from 'sweetalert2';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private store: Store<fromApp.AppState>) {
   }
 
-  formLogin: any;
 
   ngOnInit(): void {
-    this.formLogin = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl()
-    })
+
   }
 
-  onSubmit() {
-    this.userService.login(this.formLogin.value)
+  onSubmit(authForm: NgForm) {
+    if (!authForm.valid) {
+      return;
+    }
+    const email = authForm.value.email;
+    const password = authForm.value.password;
+
+    this.store.dispatch(new AuthActions.LoginStart({email: email, password: password}));
+
+
+    authForm.reset();
+    /*this.userService.login(this.formLogin.value)
       .then(() => {
           Swal.fire({
             icon: 'success',
@@ -44,6 +53,6 @@ export class AuthComponent implements OnInit {
             background: '#F4F6F7'
           }).then(r => {})
         }
-      );
+      );*/
   }
 }
