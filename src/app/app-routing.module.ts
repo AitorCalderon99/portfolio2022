@@ -5,7 +5,7 @@ import {WorkComponent} from "./work/work.component";
 import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
 import {AdminComponent} from "./admin/admin.component";
-import {canActivate, redirectUnauthorizedTo,redirectLoggedInTo} from "@angular/fire/auth-guard";
+import {AuthGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'admin', component: AdminComponent,
-    ...canActivate(()=> redirectUnauthorizedTo(['/user']))
+    canActivate: [AuthGuard]
   },
   {
     path: 'user', loadChildren: () =>

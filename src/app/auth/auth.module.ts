@@ -4,6 +4,7 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {canActivate, redirectLoggedInTo} from "@angular/fire/auth-guard";
+import {AuthGuard} from "./auth.guard";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,6 @@ import {canActivate, redirectLoggedInTo} from "@angular/fire/auth-guard";
     FormsModule,
     RouterModule.forChild([{
       path: '', component: AuthComponent,
-      ...canActivate(() => redirectLoggedInTo(['/admin']))
     }])
   ]
 })
