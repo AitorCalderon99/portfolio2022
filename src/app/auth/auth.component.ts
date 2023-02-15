@@ -5,6 +5,7 @@ import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
 import {Subscription} from "rxjs";
 import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -19,12 +20,17 @@ export class AuthComponent implements OnInit {
   private storeSub: Subscription;
 
   constructor(
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
     this.storeSub = this.store.select('auth').subscribe(authState => {
+      //Redirect to admin if logged
+      if (!!authState.user){
+        this.router.navigate(['/admin']);
+      }
 
       this.error = authState.authError;
       if (this.error) {
