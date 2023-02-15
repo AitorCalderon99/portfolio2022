@@ -25,8 +25,8 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.storeSub = this.store.select('auth').subscribe(authState => {
+
       this.error = authState.authError;
-      console.log(authState);
       if (this.error) {
         Swal.fire({
           icon: 'error',

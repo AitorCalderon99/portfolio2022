@@ -49,12 +49,13 @@ import {AuthInterceptorService} from "./auth/auth-interceptor.service";
     EffectsModule.forRoot([AuthEffects]),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
+    provideAuth(() => getAuth()),
     CommonModule,
     provideFirestore(() => getFirestore()),
     StoreModule.forRoot(fromApp.appReducer)
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+   {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })
