@@ -4,6 +4,7 @@ import {Store} from "@ngrx/store";
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
 import {Subscription} from "rxjs";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-auth',
@@ -13,38 +14,45 @@ import {Subscription} from "rxjs";
 export class AuthComponent implements OnInit {
 
   error: string = null;
-  //@ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
 
   private closeSub: Subscription;
   private storeSub: Subscription;
 
   constructor(
-    //private componentFactoryResolver: ComponentFactoryResolver,
     private store: Store<fromApp.AppState>
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.storeSub = this.store.select('auth').subscribe(authState => {
       this.error = authState.authError;
       console.log(authState);
       if (this.error) {
-        console.log("error");
+        Swal.fire({
+          icon: 'error',
+          title: 'Suspicious...',
+          text: this.error,
+          background: '#F4F6F7'
+        }).then(r => {})
       }
     });
   }
 
-
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if (!form.valid) {
+      await Swal.fire({
+        icon: "error",
+        text: "Please, fill the fields correctly",
+        showConfirmButton: true,
+      })
       return;
     }
     const email = form.value.email;
     const password = form.value.password;
 
-      this.store.dispatch(
-        AuthActions.loginStart({ email, password })
-      );
-
+    this.store.dispatch(
+      AuthActions.loginStart({email, password})
+    );
 
 
     form.reset();
@@ -62,21 +70,4 @@ export class AuthComponent implements OnInit {
       this.storeSub.unsubscribe();
     }
   }
-
-  /*private showErrorAlert(message: string) {
-    // const alertCmp = new AlertComponent();
-    const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(
-      AlertComponent
-    );
-    const hostViewContainerRef = this.alertHost.viewContainerRef;
-    hostViewContainerRef.clear();
-
-    const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
-
-    componentRef.instance.message = message;
-    this.closeSub = componentRef.instance.close.subscribe(() => {
-      this.closeSub.unsubscribe();
-      hostViewContainerRef.clear();
-    });
-  }*/
 }

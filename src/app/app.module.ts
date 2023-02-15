@@ -22,7 +22,8 @@ import * as fromApp from './store/app.reducer';
 import {AuthModule} from "./auth/auth.module";
 import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./auth/store/auth.effects";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptorService} from "./auth/auth-interceptor.service";
 
 
 @NgModule({
@@ -47,13 +48,13 @@ import {HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     EffectsModule.forRoot([AuthEffects]),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     CommonModule,
     provideFirestore(() => getFirestore()),
     StoreModule.forRoot(fromApp.appReducer)
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

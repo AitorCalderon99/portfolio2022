@@ -3,7 +3,6 @@ import {AuthComponent} from "./auth.component";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import {canActivate, redirectLoggedInTo} from "@angular/fire/auth-guard";
 import {AuthGuard} from "./auth.guard";
 
 @NgModule({
@@ -15,7 +14,10 @@ import {AuthGuard} from "./auth.guard";
     FormsModule,
     RouterModule.forChild([{
       path: '', component: AuthComponent,
-    }])
+      canActivate: [AuthGuard]
+    },
+      {path: '**', redirectTo: '/admin'}
+    ])
   ]
 })
 export class AuthModule {
