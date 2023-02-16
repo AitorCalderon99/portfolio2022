@@ -8,6 +8,10 @@ import {WorkService} from "../services/work.service";
 import {AngularFireStorageReference} from "@angular/fire/compat/storage";
 import {Reference} from "@angular/fire/compat/firestore";
 import WorkInterface from "../interfaces/work.interface";
+import {Subscription} from "rxjs";
+import * as fromApp from "../../../../AngularRecipes/src/app/store/app.reducer";
+import {Store} from "@ngrx/store";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-admin',
@@ -21,9 +25,11 @@ export class AdminComponent implements OnInit {
   workForm: FormGroup;
   isChecked = false;
   files: FileList;
+  userIsAuthenticated = false;
+  authSubscription: Subscription;
 
 
-  constructor(private userService: UserService, private router: Router, private storage: Storage, private workService: WorkService) {
+  constructor(private userService: UserService, private router: Router, private storage: Storage, private workService: WorkService,private store: Store<fromApp.AppState>) {
     this.workForm = new FormGroup({
       title: new FormControl(),
       description: new FormControl(),
@@ -31,6 +37,9 @@ export class AdminComponent implements OnInit {
       link: new FormControl(),
       images: new FormControl()
     })
+    this.authSubscription = this.store.select('auth').pipe(map(authState => {return authState.user})).subscribe(user => {
+      this.userIsAuthenticated = !!user;
+    });
   }
 
 
@@ -45,6 +54,10 @@ export class AdminComponent implements OnInit {
   checkAll() {
     this.isChecked = !this.isChecked
   };
+
+  ngOnDestroy(): void {
+    this.authSubscription.unsubscribe();
+  }
 
   onLogout() {
     this.userService.logout()

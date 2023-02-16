@@ -1,14 +1,14 @@
 <section class="wrapper">
   <div class="main-content">
     <h3>You shouldn't be here</h3>
-    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit(authForm)" #authForm="ngForm">
       <div class="input-group">
         <label for="name">Email</label>
-        <input type="email"  id="name" autocomplete="off" formControlName="email">
+        <input type="email"  id="name" autocomplete="off" email ngModel name="email" required>
       </div>
       <div class="input-group">
         <label for="password">Password</label>
-        <input type="password"  id="password" formControlName="password">
+        <input type="password"  id="password" name="password" ngModel required>
       </div>
       <div class="input-group">
         <button type="submit">Log in</button>

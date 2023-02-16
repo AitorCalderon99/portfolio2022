@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {MenuService} from "./shared/menu.service";
+import * as fromApp from "./store/app.reducer";
+import * as AuthActions from "./auth/store/auth.actions";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +12,9 @@ import {MenuService} from "./shared/menu.service";
 export class AppComponent {
   title = 'portfolio2022';
 
-  constructor(public menuService: MenuService) {
+  constructor(private store: Store<fromApp.AppState>, public menuService: MenuService) {
+  }
+  ngOnInit() {
+    this.store.dispatch(AuthActions.autoLogin());
   }
 }

@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from "@angular/forms";
-import {UserService} from "../shared/user.service";
+import {NgForm} from "@angular/forms";
+import {Store} from "@ngrx/store";
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from './store/auth.actions';
+import {Subscription} from "rxjs";
+import Swal from "sweetalert2";
 import {Router} from "@angular/router";
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-auth',
@@ -11,39 +14,66 @@ import Swal from 'sweetalert2';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) {
+  error: string = null;
+
+  private closeSub: Subscription;
+  private storeSub: Subscription;
+
+  constructor(
+    private store: Store<fromApp.AppState>,
+    private router: Router
+  ) {
   }
 
-  formLogin: any;
+  ngOnInit() {
+    this.storeSub = this.store.select('auth').subscribe(authState => {
+      //Redirect to admin if logged
+      if (!!authState.user){
+        this.router.navigate(['/admin']);
+      }
 
-  ngOnInit(): void {
-    this.formLogin = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl()
-    })
+      this.error = authState.authError;
+      if (this.error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Suspicious...',
+          text: this.error,
+          background: '#F4F6F7'
+        }).then(r => {})
+      }
+    });
   }
 
-  onSubmit() {
-    this.userService.login(this.formLogin.value)
-      .then(() => {
-          Swal.fire({
-            icon: 'success',
-            background: 'transparent',
-            showConfirmButton: false,
-            timer: 1300
-          }).then(r => {
-            this.router.navigate(['/admin']);
-          })
-        }
-      )
-      .catch(error => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Suspicious...',
-            text: 'Email or password incorrect',
-            background: '#F4F6F7'
-          }).then(r => {})
-        }
-      );
+  async onSubmit(form: NgForm) {
+    if (!form.valid) {
+      await Swal.fire({
+        icon: "error",
+        text: "Please, fill the fields correctly",
+        showConfirmButton: true,
+      })
+      return;
+    }
+    const email = form.value.email;
+    const password = form.value.password;
+
+    this.store.dispatch(
+      AuthActions.loginStart({email, password})
+    );
+
+
+    form.reset();
+  }
+
+  onHandleError() {
+    this.store.dispatch(AuthActions.clearError());
+  }
+
+  ngOnDestroy() {
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
+    if (this.storeSub) {
+      this.storeSub.unsubscribe();
+    }
   }
 }
