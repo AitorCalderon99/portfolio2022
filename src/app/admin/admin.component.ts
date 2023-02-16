@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../shared/user.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
 import {deleteObject, getDownloadURL, getMetadata, listAll, ref, Storage, uploadBytes} from "@angular/fire/storage";
 import {FormControl, FormGroup} from "@angular/forms";
 import {WorkService} from "../services/work.service";
-import {AngularFireStorageReference} from "@angular/fire/compat/storage";
-import {Reference} from "@angular/fire/compat/firestore";
 import WorkInterface from "../interfaces/work.interface";
 import {Subscription} from "rxjs";
-import * as fromApp from "../../../../AngularRecipes/src/app/store/app.reducer";
 import {Store} from "@ngrx/store";
 import {map} from "rxjs/operators";
+import * as AuthActions from '../auth/store/auth.actions';
+import * as fromApp from '../store/app.reducer';
+
+
 
 @Component({
   selector: 'app-admin',
@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
   authSubscription: Subscription;
 
 
-  constructor(private userService: UserService, private router: Router, private storage: Storage, private workService: WorkService,private store: Store<fromApp.AppState>) {
+  constructor(private router: Router, private storage: Storage, private workService: WorkService,private store: Store<fromApp.AppState>) {
     this.workForm = new FormGroup({
       title: new FormControl(),
       description: new FormControl(),
@@ -60,21 +60,9 @@ export class AdminComponent implements OnInit {
   }
 
   onLogout() {
-    this.userService.logout()
-      .then(() => {
-          Swal.fire({
-            icon: 'success',
-            background: 'transparent',
-            text: 'Bye master',
-            color: 'white',
-            showConfirmButton: false,
-            timer: 1600
-          }).then(async r => {
-            await this.router.navigate(['/']);
-          })
-        }
-      )
-      .catch(error => console.log(error));
+    this.store.dispatch(
+      AuthActions.logout()
+    );
   }
 
   prepareUpload($event: any, folder: string) {
