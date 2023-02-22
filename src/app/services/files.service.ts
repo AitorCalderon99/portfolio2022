@@ -5,7 +5,6 @@ import filesInterface from "../interfaces/files.interface";
 import {from} from "rxjs";
 import Swal from "sweetalert2";
 
-
 @Injectable({
   providedIn: 'root'
 })

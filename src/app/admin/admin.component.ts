@@ -13,7 +13,6 @@ import * as fromApp from '../store/app.reducer';
 import filesInterface from "../interfaces/files.interface";
 import {FilesService} from "../services/files.service";
 
-
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -31,7 +30,6 @@ export class AdminComponent implements OnInit {
   aboutImgsFolderName: string;
   resumesFolderName: string;
 
-
   constructor(private router: Router, private filesService: FilesService, private workService: WorkService, private store: Store<fromApp.AppState>) {
     this.workForm = new FormGroup({
       title: new FormControl(),
@@ -46,7 +44,6 @@ export class AdminComponent implements OnInit {
       this.userIsAuthenticated = !!user;
     });
   }
-
 
   ngOnInit(): void {
     this.aboutImgsFolderName = this.filesService.aboutImgsFolderName;
@@ -75,7 +72,6 @@ export class AdminComponent implements OnInit {
     );
   }
 
-
   async prepareUpload($event: any, folder: string) {
     const file = $event.target.files[0];
 
@@ -90,7 +86,6 @@ export class AdminComponent implements OnInit {
       this.resumes = await this.filesService.delete(fileName, folder) :
       this.aboutImgs = await this.filesService.delete(fileName, folder);
   }
-
 
   //Work -> WorkService
   async deleteWork(work: WorkInterface) {
@@ -109,20 +104,6 @@ export class AdminComponent implements OnInit {
       })
     });
   }
-
-  /*async onSubmitWork() {
-    let form = this.workForm.value;
-    if (form.title && form.description && form.codedwith && form.link && form.images) {
-      for (let i = 0; i < this.files.length; i++) {
-        let item = this.files.item(i);
-        if (item) {
-          this.upload(<File>this.files.item(i), 'work/' + form.title);
-        }
-      }
-      await this.workService.addWork(this.workForm.value);
-    }
-  }*/
-
   workImages($event: any) {
     this.files = $event.target.files;
   }
