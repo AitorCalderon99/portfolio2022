@@ -25,7 +25,7 @@
                   <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form [formGroup]="workForm" (ngSubmit)="onSubmitWork()">
+                <form [formGroup]="workForm">
                   <div class="modal-body">
                     <div class="container-work">
                       <div class="mb-3">
@@ -47,7 +47,8 @@
                       </div>
                       <div class="mb-3">
                         <label class="form-label">Images</label>
-                        <input type="file" (change)="workImages($event)" multiple="multiple" class="form-control" formControlName="images">
+                        <input type="file" (change)="workImages($event)" multiple="multiple" class="form-control"
+                               formControlName="images">
                       </div>
                     </div>
                   </div>
@@ -118,12 +119,13 @@
                 <td>{{resume.size}}</td>
                 <td>{{resume.date }}</td>
                 <td>
-                  <button class="btn btn-danger" (click)="delete(resume.name, 'resume')">Delete</button>
+                  <button class="btn btn-danger" (click)="prepareDelete(resume.name, resumesFolderName)">Delete</button>
                 </td>
               </tr>
               </tbody>
             </table>
-            <input type="file" (change)="prepareUpload($event, 'resume')" placeholder="Add resume" #addResume class="hidden">
+            <input type="file" (change)="prepareUpload($event, resumesFolderName)" placeholder="Add resume" #addResume
+                   class="hidden">
           </div>
         </div>
       </div>
@@ -161,12 +163,12 @@
                 <td>{{img.size}}</td>
                 <td>{{img.date }}</td>
                 <td>
-                  <button class="btn btn-danger" (click)="delete(img.name, 'aboutimgs')">Delete</button>
+                  <button class="btn btn-danger" (click)="prepareDelete(img.name, aboutImgsFolderName)">Delete</button>
                 </td>
               </tr>
               </tbody>
             </table>
-            <input type="file" (change)="prepareUpload($event, 'aboutimgs')" #addAboutimg class="hidden">
+            <input type="file" (change)="prepareUpload($event, aboutImgsFolderName)" #addAboutimg class="hidden">
           </div>
         </div>
       </div>

@@ -10,7 +10,8 @@ import {Store} from "@ngrx/store";
 import {map} from "rxjs/operators";
 import * as AuthActions from '../auth/store/auth.actions';
 import * as fromApp from '../store/app.reducer';
-
+import filesInterface from "../interfaces/files.interface";
+import {FilesService} from "../services/files.service";
 
 
 @Component({
@@ -19,17 +20,19 @@ import * as fromApp from '../store/app.reducer';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  resumes = new Array<{ name: string, url: string, date: string, size: string }>();
-  aboutImgs = new Array<{ name: string, url: string, date: string, size: string }>();
+  resumes = new Array<filesInterface>();
+  aboutImgs = new Array<filesInterface>();
   works = new Array<WorkInterface>();
   workForm: FormGroup;
   isChecked = false;
   files: FileList;
   userIsAuthenticated = false;
   authSubscription: Subscription;
+  aboutImgsFolderName: string;
+  resumesFolderName: string;
 
 
-  constructor(private router: Router, private storage: Storage, private workService: WorkService,private store: Store<fromApp.AppState>) {
+  constructor(private router: Router, private filesService: FilesService, private workService: WorkService, private store: Store<fromApp.AppState>) {
     this.workForm = new FormGroup({
       title: new FormControl(),
       description: new FormControl(),
@@ -37,15 +40,22 @@ export class AdminComponent implements OnInit {
       link: new FormControl(),
       images: new FormControl()
     })
-    this.authSubscription = this.store.select('auth').pipe(map(authState => {return authState.user})).subscribe(user => {
+    this.authSubscription = this.store.select('auth').pipe(map(authState => {
+      return authState.user
+    })).subscribe(user => {
       this.userIsAuthenticated = !!user;
     });
   }
 
 
   ngOnInit(): void {
-    this.getResumes();
-    this.getAboutimgs();
+    this.aboutImgsFolderName = this.filesService.aboutImgsFolderName;
+    this.resumesFolderName = this.filesService.resumesFolderName;
+
+    this.aboutImgs = this.filesService.getFiles(this.aboutImgsFolderName);
+    this.resumes = this.filesService.getFiles(this.resumesFolderName);
+
+    //this.getAboutimgs();
     this.workService.getWorks().subscribe(works => {
       this.works = works;
     });
@@ -65,85 +75,24 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  prepareUpload($event: any, folder: string) {
+
+  async prepareUpload($event: any, folder: string) {
     const file = $event.target.files[0];
-    this.upload(file, folder)
+
+    folder === this.resumesFolderName ?
+      this.resumes = await this.filesService.upload(file, folder) :
+      this.aboutImgs = await this.filesService.upload(file, folder);
+
   }
 
-  upload(file: File, folder: string) {
-    const resumeRef = ref(this.storage, folder + `/${file.name}`);
-    uploadBytes(resumeRef, file)
-      .then(async r => {
-        folder == 'resume' ? this.getResumes() : this.getAboutimgs();
-
-        await Swal.fire({
-          icon: "success",
-          text: "Uploaded",
-          showConfirmButton: false,
-          timer: 1800
-        })
-
-      })
-      .catch(async error => {
-        await Swal.fire({
-          icon: "error",
-          text: error,
-          showConfirmButton: true,
-        })
-      })
+  async prepareDelete(fileName: string, folder: string) {
+    folder === this.resumesFolderName ?
+      this.resumes = await this.filesService.delete(fileName, folder) :
+      this.aboutImgs = await this.filesService.delete(fileName, folder);
   }
 
-  getResumes() {
-    this.resumes = new Array<{ name: string, url: string, date: string, size: string }>();
-    const resumeRef = ref(this.storage, `resume`);
-    this.listItems(resumeRef, this.resumes);
-  }
 
-  getAboutimgs() {
-    this.aboutImgs = new Array<{ name: string, url: string, date: string, size: string }>();
-    const aboutRef = ref(this.storage, `aboutimgs`);
-    this.listItems(aboutRef, this.aboutImgs);
-  }
-
-  listItems(ref: any, items: any) {
-    listAll(ref)
-      .then(async res => {
-        for (let item of res.items) {
-          const metadata = await getMetadata(item);
-
-          const url = await getDownloadURL(item);
-          items.push({
-            date: new Date(metadata.updated).toLocaleDateString(),
-            size: this.formatBytes(metadata.size),
-            name: item.name,
-            url: url
-          });
-        }
-      })
-      .catch(error => console.log(error));
-  }
-
-  delete(fileName: string, folder: string) {
-    const fileToDelete = ref(this.storage, folder + '/' + fileName);
-
-    deleteObject(fileToDelete).then(async () => {
-      folder == 'resume' ? this.getResumes() : this.getAboutimgs();
-
-      await Swal.fire({
-        icon: "success",
-        text: "Deleted",
-        showConfirmButton: false,
-        timer: 1800
-      })
-    }).catch(async (error) => {
-      await Swal.fire({
-        icon: "error",
-        title: "Something went wrong",
-        text: error,
-      })
-    });
-  }
-
+  //Work -> WorkService
   async deleteWork(work: WorkInterface) {
     this.workService.deleteWork(work).then(async () => {
       await Swal.fire({
@@ -161,8 +110,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  async onSubmitWork() {
-
+  /*async onSubmitWork() {
     let form = this.workForm.value;
     if (form.title && form.description && form.codedwith && form.link && form.images) {
       for (let i = 0; i < this.files.length; i++) {
@@ -173,13 +121,7 @@ export class AdminComponent implements OnInit {
       }
       await this.workService.addWork(this.workForm.value);
     }
-  }
-
-  formatBytes(a: number, b = 2) {
-    if (!+a) return "0 Bytes";
-    const c = 0 > b ? 0 : b, d = Math.floor(Math.log(a) / Math.log(1024));
-    return `${parseFloat((a / Math.pow(1024, d)).toFixed(c))} ${["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][d]}`
-  }
+  }*/
 
   workImages($event: any) {
     this.files = $event.target.files;
