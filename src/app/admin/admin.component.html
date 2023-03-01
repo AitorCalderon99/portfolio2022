@@ -25,7 +25,7 @@
                   <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form [formGroup]="workForm">
+                <form [formGroup]="workForm" (ngSubmit)="onSubmitWork()">
                   <div class="modal-body">
                     <div class="container-work">
                       <div class="mb-3">
@@ -46,15 +46,19 @@
                         <input type="text" class="form-control" formControlName="link">
                       </div>
                       <div class="mb-3">
-                        <label class="form-label">Images</label>
-                        <input type="file" (change)="workImages($event)" multiple="multiple" class="form-control"
+                        <label class="form-label">Repository</label>
+                        <input type="text" class="form-control" formControlName="repo">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Image</label>
+                        <input type="file" (change)="workImages($event)" class="form-control"
                                formControlName="images">
                       </div>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                   </div>
                 </form>
               </div>

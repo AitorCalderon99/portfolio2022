@@ -21,13 +21,14 @@ export class WorkComponent implements OnInit {
     });
   }
 
-  async seeMore() {
+  async seeMore(project: WorkInterface) {
     await Swal.fire({
-      title: 'Title',
-      text: 'Description',
+      title: project.title,
+      text: project.description,
       showConfirmButton: true,
       confirmButtonColor: 'black',
       confirmButtonText: 'View Site',
+
     })
   }
 }

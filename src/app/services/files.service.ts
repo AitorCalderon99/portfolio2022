@@ -36,8 +36,13 @@ export class FilesService {
 
   async upload(file: File, folder: string) {
     const resumeRef = ref(this.storage, folder + `/${file.name}`);
+    let downloadUrl = '';
     await uploadBytes(resumeRef, file)
-      .then(async r => {
+      .then(async (snapshot) => {
+        getDownloadURL(snapshot.ref).then( url => {
+          downloadUrl = url;
+        });
+
         await Swal.fire({
           icon: "success",
           text: "Uploaded",
@@ -52,7 +57,7 @@ export class FilesService {
           showConfirmButton: true,
         })
       })
-    return this.getFiles(folder);
+    return downloadUrl;
   }
 
   async delete(fileName: string, folder: string) {

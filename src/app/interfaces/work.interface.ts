@@ -4,6 +4,7 @@ export default interface WorkInterface {
   description: string,
   codedwith: string,
   link: string,
-  images: []
+  images: String,
+  repository: string
 
 }
