@@ -22,13 +22,33 @@ export class WorkComponent implements OnInit {
   }
 
   async seeMore(project: WorkInterface) {
+    const el = document.createElement('div')
+    el.innerHTML = "Here's a <a href='http://google.com'>link</a>"
+
+
     await Swal.fire({
       title: project.title,
       text: project.description,
-      showConfirmButton: true,
-      confirmButtonColor: 'black',
+      showCancelButton: true,
       confirmButtonText: 'View Site',
-
+      cancelButtonText: 'View Git',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.open(project.link, "_blank");
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        if (project.repository && project.repository != '#') {
+          window.open(project.repository, "_blank");
+        } else {
+          Swal.fire({
+            title: 'No demo available',
+            showCancelButton: true,
+            cancelButtonText: 'Close',
+          })
+        }
+      }
     })
   }
 }
