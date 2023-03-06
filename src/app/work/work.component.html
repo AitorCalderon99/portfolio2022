@@ -3,8 +3,8 @@
 
 </div>
 <div class="main-container">
-  <div class="container-work" *ngFor="let project of works">
-    <div class="card" [style.background-image]="'url(' + project.images + ')'">
+  <div class="container-work" >
+    <div class="card" *ngFor="let project of works" [style.background-image]="'url(' + project.images + ')'">
       <div class="content">
         <div class="content-header"><h1>{{project.title}}</h1>
           <p>{{project.codedwith}} </p></div>

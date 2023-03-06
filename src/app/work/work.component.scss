@@ -19,8 +19,8 @@
     display: flex;
     flex-direction: row;
     max-width: 1000px;
-    column-gap: 1%;
-    row-gap: 1%;
+    column-gap: 2%;
+    row-gap: 2%;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -34,7 +34,7 @@
 
       height: 300px;
       border-radius: 5px;
-      background-size: cover;
+      background-size: initial;
       box-shadow: 2px 4px 4px rgba(72, 72, 72, 0.8);
       overflow: hidden;
       margin-bottom: 15px;
