@@ -30,12 +30,18 @@ export class WorkComponent implements OnInit {
       title: project.title,
       text: project.description,
       showCancelButton: true,
-      confirmButtonText: 'View Site',
-      cancelButtonText: 'View Git',
+      confirmButtonText: 'Ver Sitio',
+      cancelButtonText: 'Ver Git',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        window.open(project.link, "_blank");
+        if (project.link && project.link != '#') {
+          window.open(project.link, "_blank");
+        } else {
+          Swal.fire({
+            title: 'No hay desmostración disponible',
+          })
+        }
       } else if (
         result.dismiss === Swal.DismissReason.cancel
       ) {
@@ -43,9 +49,7 @@ export class WorkComponent implements OnInit {
           window.open(project.repository, "_blank");
         } else {
           Swal.fire({
-            title: 'No demo available',
-            showCancelButton: true,
-            cancelButtonText: 'Close',
+            title: 'No hay repositorio disponible',
           })
         }
       }
