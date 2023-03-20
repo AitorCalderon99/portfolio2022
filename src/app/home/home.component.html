@@ -1,10 +1,10 @@
 <div class="bigContainer">
-  <div class="main-text animate__animated animate__fadeInDown">HEY, I’M <span>AITOR CALDERON</span></div>
-  <div class="category-text animate__animated animate__fadeInUp animate__delay-1s">I’m web developer</div>
+  <div class="main-text animate__animated animate__fadeInDown">{{'home.greet' | translate}}<span>AITOR CALDERON</span></div>
+  <div class="category-text animate__animated animate__fadeInUp animate__delay-1s">{{'home.whoami' | translate}}</div>
   <div class="row-about">
-    <a [routerLink]="['work']" class="hover-underline-animation  animate__animated animate__fadeInBottomLeft animate__delay-2s">See
-      my projects</a>
+    <a [routerLink]="['work']"
+       class="hover-underline-animation  animate__animated animate__fadeInBottomLeft animate__delay-2s">{{'home.seeProjects' | translate}}</a>
     <a [routerLink]="['about']"
-       class="hover-underline-animation  animate__animated animate__fadeInBottomRight animate__delay-2s">More about me</a>
+       class="hover-underline-animation  animate__animated animate__fadeInBottomRight animate__delay-2s">{{'home.moreAbout' | translate}}</a>
   </div>
 </div>

@@ -6,6 +6,7 @@ import * as AuthActions from './store/auth.actions';
 import {Subscription} from "rxjs";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-auth',
@@ -21,25 +22,28 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private store: Store<fromApp.AppState>,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {
   }
 
   ngOnInit() {
     this.storeSub = this.store.select('auth').subscribe(authState => {
       //Redirect to admin if logged
-      if (!!authState.user){
+      if (!!authState.user) {
         this.router.navigate(['/admin']);
       }
+
 
       this.error = authState.authError;
       if (this.error) {
         Swal.fire({
           icon: 'error',
-          title: 'Suspicious...',
+          title: this.translateService.instant('auth.suspicious'),
           text: this.error,
           background: '#F4F6F7'
-        }).then(r => {})
+        }).then(r => {
+        })
       }
     });
   }
@@ -48,7 +52,7 @@ export class AuthComponent implements OnInit {
     if (!form.valid) {
       await Swal.fire({
         icon: "error",
-        text: "Please, fill the fields correctly",
+        text: this.translateService.instant('auth.suspicious'),
         showConfirmButton: true,
       })
       return;

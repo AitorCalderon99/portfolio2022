@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {MenuService} from "../shared/menu.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-header',
@@ -8,28 +9,26 @@ import {MenuService} from "../shared/menu.service";
 })
 export class HeaderComponent {
 
+  lang = 'EN';
+
   @ViewChild('asName') asName: ElementRef | undefined;
   logoVisible = false;
 
   toggleNav() {
     this.menuService.toggleNav();
-    this.changeLogo();
-
   }
-  changeLogo(){
-    /*this.logoVisible = !this.logoVisible
-    let element = this.asName?.nativeElement;
-    element.offsetWidth;
-    let addOutStyle = 'animate__animated animate__bounce animate__delay-2s';
-    addOutStyle.split(' ').forEach((className: string) => {
-      this.renderer.addClass(element,className)
-    });
-    console.log(this.asName?.nativeElement)*/
-
+  constructor(public menuService: MenuService, private renderer: Renderer2, public translate: TranslateService) {
+    this.translate.currentLang = this.translate.defaultLang;
   }
 
-  constructor(public menuService: MenuService, private renderer: Renderer2) {
+  toggleLang() {
+    if (this.translate.currentLang === 'es') {
+      this.translate.use('en');
+      this.lang = 'ES';
+    } else {
+      this.translate.use('es');
+      this.lang = 'EN';
+    }
   }
-
 
 }
