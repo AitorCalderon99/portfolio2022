@@ -8,15 +8,24 @@
   padding-right: 2%;
 
   #langPicker {
-    font-size: 1.8em;
+
+    font-size: 1em;
+    @media (min-width: $medium) {
+      font-size: 1.1em;
+
+    }
+    @media (min-width: $big) {
+      font-size: 1.5em;
+    }
     cursor: pointer;
     align-self: center;
     align-items: flex-end;
-    padding-right: 40px;
+    padding-right: 4%;
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 2px;
-    &:hover{
+
+    &:hover {
       font-weight: bold;
     }
   }
@@ -42,16 +51,13 @@
       &::first-letter {
         font-size: 60px;
       }
-      .hamburger {
-        height: 200px;
-      }
     }
   }
 
   input {
-    --s: 6px; /* control the size */
+    --s: 7px; /* control the size */
     @media (min-width: $medium) {
-      --s: 9px;
+      --s: 10px;
     }
 
     border: none;
@@ -60,7 +66,7 @@
     margin: calc(4 * var(--s)) 0;
     cursor: pointer;
     height: var(--s);
-    aspect-ratio: 7/1;
+    aspect-ratio: 8/1;
     border-radius: 100px;
     display: inline-block;
     position: relative;
