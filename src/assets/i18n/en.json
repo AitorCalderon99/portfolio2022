@@ -1,0 +1,36 @@
+{
+  "genericError": "Something went wrong",
+  "home": {
+    "greet": "HEY, I’M ",
+    "whoami": "I’m web developer",
+    "seeProjects": "See my projects",
+    "moreAbout": "More about me"
+  },
+  "navigation": {
+    "home": "Home",
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "about": {
+    "aboutMe": "About me",
+    "text": "I am a Web Developer in constant training, I am passionate about learning new techniques and languages. I'm currently working as a Back-End Developer in Bilbomatica and in my free time I'm training in Angular in a self-taught way with courses and personal projects.\n \nI am Open to face new work challenges do not hesitate to contact!\n    \n    Skills:\n    - HTML\n    - CSS, SASS, Bootstrap\n    - JavaScript, TypeScript\n    - Training in Angular\n    - SQL and NoSQL databases\n    - Git - GitHub\n    - JAVA, Object Oriented Programming\n   \nI also have knowledge in Linux, Docker, Firebase and AWS (basic level).",
+    "resume": "Resume"
+  },
+  "work": {
+    "seeMore": "See more",
+    "work": "Work"
+  },
+  "auth": {
+    "intro": "You shouldn't be here",
+    "password": "Password",
+    "logIn": "Log in",
+    "suspicious": "Suspicious...",
+    "fillFields": "Please, fill the fields correctly",
+    "pdfError": "PDF no available"
+  },
+  "contact": {
+    "title": "Let's get in touch",
+    "social": "Social medias"
+  }
+}

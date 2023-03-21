@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {getDownloadURL, list, listAll, ref, Storage} from "@angular/fire/storage";
 import Swal from "sweetalert2";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-about',
@@ -11,11 +12,9 @@ export class AboutComponent implements OnInit {
   backgroundImg: string = '';
   @ViewChild('backgroundImage') backgroundImage: any;
 
-
-  constructor(private storage: Storage, private renderer: Renderer2, private elementRef: ElementRef) {
+  constructor(private storage: Storage, private renderer: Renderer2, private elementRef: ElementRef, private translateService: TranslateService) {
 
   }
-
 
   ngOnInit(): void {
    this.setBackgroundImg();
@@ -30,7 +29,6 @@ export class AboutComponent implements OnInit {
     list(imgRef, {maxResults: 1}).then(async res => {
       await getDownloadURL(res.items[0]).then(r => {
        this.backgroundImg = r;
-       console.log(r);
       })
     }).catch(error => {
       console.log('Could not download background image from backend.')
@@ -45,15 +43,15 @@ export class AboutComponent implements OnInit {
       }).catch(async error => {
         await Swal.fire({
           icon: "error",
-          title: "Something went wrong",
+          title: this.translateService.instant("genericError"),
           text: error,
         })
       });
     }).catch(async error => {
       await Swal.fire({
         icon: "error",
-        title: "Something went wrong",
-        text: 'PDF no available',
+        title: this.translateService.instant("genericError"),
+        text: this.translateService.instant("pdfError"),
       })
     })
   }

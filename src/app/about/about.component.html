@@ -1,26 +1,16 @@
 <div class="container-text">
-  <p class="contact-text animate__animated animate__bounceInLeft animate__delay-fast">About me</p>
-  <p class="middle-text animate__animated animate__bounceInLeft animate__delay-1s">I am a Web Developer in constant training, I am passionate about learning new techniques and languages. I'm currently working as a Back-End Developer in Bilbomatica and in my free time I'm training in Angular in a self-taught way with courses and personal projects.
-    <br><br>
-    I am Open to face new work challenges do not hesitate to contact!
-    <br><br>
-    Skills:<br>
-    - HTML<br>
-    - CSS, SASS, Bootstrap<br>
-    - JavaScript, TypeScript<br>
-    - Training in Angular<br>
-    - SQL and NoSQL databases<br>
-    - Git - GitHub<br>
-    - JAVA, Object Oriented Programming<br>
-    <br>
-    I also have knowledge in Linux, Docker, Firebase and AWS (basic level).</p>
+  <p
+    class="contact-text animate__animated animate__bounceInLeft animate__delay-fast">{{"about.aboutMe" | translate}}
+  </p>
+  <p class="middle-text animate__animated animate__bounceInLeft animate__delay-1s" style="white-space:pre-wrap">{{"about.text" | translate}}
+  </p>
   <a target="_blank" #resumeElement (click)="downloadResume()"
      class="middle-text resume hover-underline-animation animate__animated animate__bounceInLeft animate__delay-2s hover-underline-animation">
     <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
       <path
         d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>
     </svg>
-    Resume
+    {{"about.resume" | translate}}
     <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
       <path
         d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>

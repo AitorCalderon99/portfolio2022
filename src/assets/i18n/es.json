@@ -1,0 +1,36 @@
+{
+  "genericError": "La acción no se ha podido realizar",
+  "home": {
+    "greet": "HEY, SOY ",
+    "whoami": "Soy desarrollador web",
+    "seeProjects": "Ver proyectos",
+    "moreAbout": "Mas sobre mi"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "work": "Trabajos",
+    "about": "Sobre mi",
+    "contact": "Contacto"
+  },
+  "about": {
+    "aboutMe": "Sobre mi",
+    "text": "Soy un Desarrollador Web en constante formación, me apasiona aprender nuevas técnicas y lenguajes. Actualmente, estoy trabajando como Desarrollador Back-End en Bilbomatica y en mis ratos libres estoy formándome en Angular de manera autodidacta con cursos y proyectos personales.\n\nEstoy Abierto a afrontar nuevos desafíos laborales ¡No dudes en contactar!\n\nHabilidades:\n - HTML\n - CSS, SASS, Bootstrap\n - JavaScript, TypeScript\n - Formándome en Angular\n - Bases de datos SQL y NoSQL\n - Git - GitHub\n - JAVA, Programación Orientada a Objetos\n\nAdemás cuento con conocimientos en Linux, Docker, Firebase y AWS (nivel básico).",
+    "resume": "Curriculum"
+  },
+  "work": {
+    "seeMore": "Ver más",
+    "work": "Proyectos"
+  },
+  "auth": {
+    "intro": "No deberías estar aqui",
+    "password": "Contraseña",
+    "logIn": "Acceder",
+    "suspicious": "Sospechoso...",
+    "fillFields": "Por favor rellene los campos correctamente",
+    "pdfError": "PDF no disponible"
+  },
+  "contact": {
+    "title": "Contactemos",
+    "social": "Redes sociales"
+  }
+}
