@@ -65,7 +65,6 @@
         }
       }
 
-
       .read-more-link {
         display: inline-flex;
         align-items: center;
@@ -75,6 +74,9 @@
         text-decoration: none;
         transition: all 0.3s;
         cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .read-more-link:hover {
@@ -85,7 +87,7 @@
       .read-more-link svg {
         padding-top: 2px;
         height: 12px;
-        margin-left: 6px;
+        margin-left: 5px;
         transition: transform 0.3s;
       }
 
