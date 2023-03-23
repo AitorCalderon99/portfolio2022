@@ -16,6 +16,7 @@ export class HeaderComponent {
 
   toggleNav() {
     this.menuService.toggleNav();
+
   }
   constructor(public menuService: MenuService, private renderer: Renderer2, public translate: TranslateService) {
     this.translate.currentLang = this.translate.defaultLang;

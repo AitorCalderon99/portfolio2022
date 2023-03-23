@@ -2,7 +2,8 @@
   <span id="bigAletter" class="fontOldenburg"><a
     [routerLink]=" menuService.active ? null:['']">{{menuService.active ? 'Aitor Calderon' : 'A'}}</a></span>
   <div id="langPicker" (click)="toggleLang()">{{lang}}</div>
-  <input type="checkbox" role="button" aria-label="Display the menu" [checked]="menuService.active ? 'active' : ''"
-         (click)="toggleNav()"/>
+  <div class="menu-btn" (click)="toggleNav()" [ngClass]="menuService.active ? 'open' : ''">
+    <div class="menu-btn__burger" ></div>
+  </div>
 </div>
 
