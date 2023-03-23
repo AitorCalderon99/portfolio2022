@@ -4,7 +4,7 @@
 </div>
 <div class="main-container">
   <div class="container-work" >
-    <div class="card animate__animated animate__fadeInDownBig" [style.animation-delay]="i+'s'" *ngFor="let project of works; let i = index" [style.background-image]="'url(' + project.images + ')'">
+    <div class="card animate__animated animate__fadeInDownBig" [style.animation-delay]="(i-0.5)+'s'" *ngFor="let project of works; let i = index" [style.background-image]="'url(' + project.images + ')'">
       <div class="content">
         <div class="content-header"><h1>{{project.title}}</h1>
           <p>{{project.codedwith}} </p></div>
