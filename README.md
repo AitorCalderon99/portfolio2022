@@ -8,8 +8,6 @@
 <!-- PROJECT LOGO -->
 
   <h1 align="center">Aitor Calderon's Portfolio</h1>
-    <h3 align="center">Work in progress</h3>
-
   
   <p align="center">
     <br />
