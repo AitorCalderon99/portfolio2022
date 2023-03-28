@@ -61,6 +61,9 @@ Used Angular Features:
   - HTTP Requests
   - Authentication
   - Route protection with route guards
+  - RxJS
+  - Services
+  - Directives
 
 [![Angular][Angular.io]][Angular-url] ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
